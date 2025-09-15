@@ -8,15 +8,39 @@
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1"/>
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
-    
-    <VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
         <SearchBar x:Name="txt_search" 
+                   Margin="-15, 0, 0, 0"
                    Placeholder="Busca de Produtos" 
                    TextChanged="txt_search_TextChanged"/>
-        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
+        <Frame Padding="0" Margin="10" VerticalOptions="FillAndExpand" >
+
+            <ListView 
+            x:Name="lst_produtos" 
+            IsPullToRefreshEnabled="True"
+            Refreshing="lst_produtos_Refreshing"
+            ItemSelected="lst_produtos_ItemSelected">
+            
             <ListView.Header>
-                <Grid ColumnDefinitions="*, *, *, *, *">
-                    <Label Grid.Column="0" Text="Id" />
+                <Grid BackgroundColor="{StaticResource Gray100}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Grid.Column="0" Text="Id" Padding="5" FontAttributes="Bold"/>
                     <Label Grid.Column="1" Text="Descricao" />
                     <Label Grid.Column="2" Text="Preco" />
                     <Label Grid.Column="3" Text="Quantidade" />
@@ -31,7 +55,7 @@
                             <MenuItem Text="Remover" Clicked="MenuItem_Clicked"/>
                         </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*, *, *, *, *">
-                            <Label Grid.Column="0" Text="{Binding Id}" />
+                            <Label Grid.Column="0" Text="{Binding Id}" Padding="5"/>
                             <Label Grid.Column="1" Text="{Binding Descricao}" />
                             <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:C}'}" />
                             <Label Grid.Column="3" Text="{Binding Quantidade}" />
@@ -41,5 +65,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </VerticalStackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>

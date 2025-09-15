@@ -40,6 +40,8 @@ namespace MauiAppMinhasCompras.Models
                 {
                     throw new Exception("O preço não pode ser negativo");
                 }
+
+                _preco = value;
             }
         }
         public double Total { get => Quantidade * Preco; }
